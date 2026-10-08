@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>soha3kr - 작품적인 요리 개발</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fbf9f5;
+            --card-bg: #ffffff;
+            --primary-color: #6a4c41;
+            --accent-color: #8c6251;
+            --text-main: #2d2420;
+            --text-muted: #7c706b;
+            --border-color: #e6ded6;
+            --sand-light: #f4eee3;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(106, 76, 65, 0.03);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-area h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-area span {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-write {
+            padding: 10px 20px;
+            background-color: var(--primary-color) !important;
+            color: white !important;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(106, 76, 65, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .btn-write:hover {
+            background-color: var(--accent-color) !important;
+            transform: translateY(-1px);
+        }
+
+        .hero-banner {
+            max-width: 1100px;
+            margin: 40px auto 30px;
+            padding: 0 24px;
+        }
+
+        .hero-inner {
+            background: linear-gradient(135deg, #f4eee3 0%, #faebd7 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(106, 76, 65, 0.05);
+        }
+
+        .hero-inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .hero-inner p {
+            color: var(--text-muted);
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto 24px;
+        }
+
+        .search-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 6px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        input::placeholder {
+            color: #b3a69f;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: 0;
+            border-radius: 24px;
+            color: white;
+            background-color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .search-notice {
+            max-width: 1100px;
+            margin: 20px auto 10px;
+            padding: 0 24px;
+            font-size: 15px;
+            color: var(--primary-color);
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .post {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(106, 76, 65, 0.03);
+        }
+
+        .post:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(106, 76, 65, 0.08);
+            border-color: var(--accent-color);
+        }
+
+        .post a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 24px;
+        }
+
+        .post-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .post h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .post p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+            margin-top: auto;
+        }
+
+        .date {
+            font-size: 12px;
+            color: #9c8e87;
+        }
+
+        .read-more {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            font-size: 15px;
+        }
+
+        footer {
+            max-width: 1100px;
+            margin: 60px auto 0;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-inner {
+                padding: 30px 20px;
+            }
+            .hero-inner h2 {
+                font-size: 28px;
+            }
+            .nav-links {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo-area">
+                <h1>soha3kr</h1>
+                <span>Culinary Lab</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">홈</a>
+                <a href="/write" class="btn-write">글쓰기</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-inner">
+            <h2>작품적인 요리 개발</h2>
+            <p>나만의 요리, 둘먹다 둘다 산다. 정성이 담긴 레시피와 특별한 미식 기록을 만나보세요.</p>
+            <div class="search-wrapper">
+                <form action="/" method="get">
+                    <input type="text" name="keyword" value="{{ keyword }}" placeholder="글 제목이나 내용을 검색하세요">
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {% if keyword %}
+        <div class="search-notice">
+            <p><strong>“{{ keyword }}”</strong> 검색 결과</p>
+        </div>
+    {% endif %}
+
+    <main class="main-container">
+        <h3 class="section-title">✨ 최근 요리 기록</h3>
+        <div class="posts-grid">
+            {% for post in posts %}
+                <article class="post">
+                    <a href="/post/{{ post.id }}">
+                        <span class="post-tag">Recipe Note</span>
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.content[:100] }}{% if post.content|length > 100 %}...{% endif %}</p>
+                        <div class="post-footer">
+                            <span class="date">{{ post.created_at }}</span>
+                            <span class="read-more">레시피 보기 &rarr;</span>
+                        </div>
+                    </a>
+                </article>
+            {% else %}
+                <div class="empty">
+                    {% if keyword %}검색 결과가 없습니다.{% else %}아직 작성한 글이 없습니다. 첫 글을 써보세요!{% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; soha3kr. All rights reserved. Crafted with passion for exceptional dishes.</p>
+    </footer>
+</body>
+</html>
